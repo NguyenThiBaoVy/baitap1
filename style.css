@@ -1,0 +1,157 @@
+/* Reset CSS cơ bản */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Container chính sử dụng CSS Grid */
+.container {
+    display: grid;
+    
+    /* 
+     * grid-template-columns: Định nghĩa các cột.
+     * - Cột 1: 220px cho Sidebar Trái.
+     * - Cột 2: 1fr (1 fraction) cho Main Content, linh hoạt chiếm toàn bộ không gian còn lại.
+     * - Cột 3: 220px cho Sidebar Phải.
+     */
+    grid-template-columns: 220px 1fr 220px;
+    
+    /* 
+     * grid-template-rows: Định nghĩa các hàng.
+     * - Hàng 1 (Header): auto - chiều cao tự động vừa với nội dung bên trong.
+     * - Hàng 2 (Phần thân): 1fr - tự động co giãn, đảm bảo main và 2 sidebar dài bằng nhau.
+     * - Hàng 3 (Footer): auto - chiều cao tự động vừa với nội dung bên trong.
+     */
+    grid-template-rows: auto 1fr auto;
+    
+    /* 
+     * grid-template-areas: Định nghĩa bố cục trực quan bằng tên các khu vực.
+     * Các thành phần có cùng tên sẽ được nhóm lại thành một khối.
+     */
+    grid-template-areas: 
+        "header header header"
+        "sidebar-left main sidebar-right"
+        "footer footer footer";
+    
+    gap: 20px; /* Khoảng cách (margin) giữa các khu vực */
+    min-height: 100vh; /* Đảm bảo website luôn cao bằng ít nhất 100% màn hình */
+    padding: 20px; /* Khoảng cách từ lề vào lưới */
+}
+
+/* Gán tên (grid-area) cho từng khu vực để CSS Grid biết đặt chúng vào đâu */
+
+.header {
+    grid-area: header; /* Gán cho vùng "header" */
+    background-color: #3498db;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.sidebar-left {
+    grid-area: sidebar-left; /* Gán cho vùng "sidebar-left" */
+    background-color: #2ecc71;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.main-content {
+    grid-area: main; /* Gán cho vùng "main" */
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.sidebar-right {
+    grid-area: sidebar-right; /* Gán cho vùng "sidebar-right" */
+    background-color: #e74c3c;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.footer {
+    grid-area: footer; /* Gán cho vùng "footer" */
+    background-color: #2c3e50;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+/* --- Trang trí thêm nội dung bên trong cho đẹp mắt --- */
+
+.sidebar-left ul {
+    list-style: none;
+    margin-top: 15px;
+}
+
+.sidebar-left ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar-left ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-left ul li a:hover {
+    background-color: rgba(0,0,0,0.25);
+}
+
+.main-content h2, .sidebar-left h2, .sidebar-right h2 {
+    margin-bottom: 15px;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+    padding-bottom: 10px;
+}
+
+.main-content p {
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+.ad-box {
+    margin-top: 15px;
+    background-color: rgba(255,255,255,0.2);
+    padding: 20px;
+    text-align: center;
+    border: 2px dashed rgba(255,255,255,0.7);
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* Responsive: Điều chỉnh layout cho màn hình nhỏ (Tablet và Mobile) */
+@media (max-width: 768px) {
+    .container {
+        /* Đổi thành 1 cột duy nhất */
+        grid-template-columns: 1fr;
+        
+        /* Cấu trúc lại thứ tự xếp chồng từ trên xuống dưới */
+        grid-template-areas: 
+            "header"
+            "sidebar-left"
+            "main"
+            "sidebar-right"
+            "footer";
+    }
+}
